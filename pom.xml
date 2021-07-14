@@ -39,7 +39,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spotbugs.excludes.file />
         <version.docker.plugin>1.2.1</version.docker.plugin>
-        <version.junit>4.12</version.junit>
+        <version.junit>4.13.1</version.junit>
         <version.junit.jupiter>5.5.2</version.junit.jupiter>
         <version.junit.vintage>5.5.2</version.junit.vintage>
     </properties>
