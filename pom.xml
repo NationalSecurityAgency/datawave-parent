@@ -43,9 +43,16 @@
         <version.junit>4.13.2</version.junit>
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
         <version.junit.vintage>5.8.2</version.junit.vintage>
+        <version.lombok>1.18.24</version.lombok>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
