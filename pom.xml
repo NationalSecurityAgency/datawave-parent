@@ -40,9 +40,7 @@
         <spotbugs.excludes.file />
         <surefire.forkCount>1C</surefire.forkCount>
         <version.docker.plugin>1.2.1</version.docker.plugin>
-        <version.junit>4.13.2</version.junit>
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
-        <version.junit.vintage>5.8.2</version.junit.vintage>
         <version.lombok>1.18.24</version.lombok>
     </properties>
     <dependencyManagement>
@@ -54,12 +52,6 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>${version.junit.jupiter}</version>
@@ -69,12 +61,6 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>${version.junit.jupiter}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.vintage</groupId>
-                <artifactId>junit-vintage-engine</artifactId>
-                <version>${version.junit.vintage}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
