@@ -41,12 +41,11 @@
         <surefire.forkCount>1C</surefire.forkCount>
         <version.docker.plugin>1.2.1</version.docker.plugin>
         <version.jackson>2.13.2</version.jackson>
-        <version.jakarta.xml.bind>4.0.0</version.jakarta.xml.bind>
+        <!-- WARNING: 4.0.0+ requires java 11 -->
+        <version.jakarta.xml.bind>3.0.1</version.jakarta.xml.bind>
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
         <version.lombok>1.18.24</version.lombok>
-        <!-- Should be kept in lock step with jakarta.xml.bind version  When version 4.0.0 is released
-	this version should be changed to match jakarta.xml.bind  -->
-        <version.sun.xml.bind>4.0.0-M4</version.sun.xml.bind>
+        <version.sun.xml.bind>3.0.1</version.sun.xml.bind>
     </properties>
     <dependencyManagement>
         <dependencies>
