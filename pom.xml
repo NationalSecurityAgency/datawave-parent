@@ -39,45 +39,18 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spotbugs.excludes.file />
         <surefire.forkCount>1C</surefire.forkCount>
-        <version.accumulo>1.10.2</version.accumulo>
         <version.docker.plugin>1.2.1</version.docker.plugin>
-        <version.geoserver>2.16.2</version.geoserver>
-        <version.geotools>26.4</version.geotools>
-        <version.geowave>2.0.0</version.geowave>
-        <version.guava>31.1-jre</version.guava>
-        <!-- This version has 2 vulnerabilities.... consider trying to upgrade -->
-        <version.hadoop>3.0.3</version.hadoop>
-        <version.jjwt>0.11.4</version.jjwt>
-        <version.jts>1.18.2</version.jts>
+        <version.jackson>2.13.2</version.jackson>
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
-        <!-- Consider trying to upgrade to 1.8.0 -->
-        <version.protostuff>1.7.4</version.protostuff>
-        <version.spring.boot>2.6.7</version.spring.boot>
-        <version.zookeeper>3.6.3</version.zookeeper>
+        <version.lombok>1.18.24</version.lombok>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${version.spring.boot}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>commons-logging</artifactId>
-                        <groupId>commons-logging</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>spring-boot-starter-logging</artifactId>
-                        <groupId>org.springframework.boot</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${version.spring.boot}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -155,7 +128,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>4.0.0</version>
+                    <version>3.1.12.2</version>
                     <executions>
                         <execution>
                             <goals>
