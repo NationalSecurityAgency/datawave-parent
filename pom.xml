@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.nsa.datawave.microservice</groupId>
     <artifactId>datawave-microservice-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DataWave Microservices Parent</name>
     <description>DataWave mircoservices provide functionality previously contained in the DataWave
@@ -32,42 +32,64 @@
     </distributionManagement>
     <properties>
         <docker.image.prefix>datawave/</docker.image.prefix>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spotbugs.excludes.file />
         <surefire.forkCount>1C</surefire.forkCount>
+        <version.accumulo>1.10.2</version.accumulo>
         <version.docker.plugin>1.2.1</version.docker.plugin>
-        <version.jackson>2.13.2</version.jackson>
-        <!-- NOTE: The Junit and log4j management here will NOT override the management provided via spring boot.  Make
-        sure to update these versions as you update the spring-boot version so that we don't get out of date. -->
-        <version.junit.bom>5.8.2</version.junit.bom>
-        <version.log4j.bom>2.17.2</version.log4j.bom>
-        <version.lombok>1.18.24</version.lombok>
+        <version.geoserver>2.16.2</version.geoserver>
+        <version.geotools>26.4</version.geotools>
+        <version.geowave>2.0.0</version.geowave>
+        <version.guava>31.1-jre</version.guava>
+        <!-- This version has 2 vulnerabilities.... consider trying to upgrade -->
+        <version.hadoop>3.0.3</version.hadoop>
+        <version.jjwt>0.11.4</version.jjwt>
+        <version.jts>1.18.2</version.jts>
+        <version.junit.jupiter>5.8.2</version.junit.jupiter>
+        <!-- Consider trying to upgrade to 1.8.0 -->
+        <version.protostuff>1.7.4</version.protostuff>
+        <version.spring.boot>2.6.7</version.spring.boot>
+        <version.zookeeper>3.6.3</version.zookeeper>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${version.lombok}</version>
-                <scope>provided</scope>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${version.spring.boot}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>commons-logging</artifactId>
+                        <groupId>commons-logging</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                        <groupId>org.springframework.boot</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-bom</artifactId>
-                <version>${version.log4j.bom}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${version.spring.boot}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${version.junit.bom}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${version.junit.jupiter}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${version.junit.jupiter}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -133,7 +155,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>3.1.12.2</version>
+                    <version>4.0.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -141,35 +163,6 @@
                             </goals>
                         </execution>
                     </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>ch.qos.reload4j</groupId>
-                            <artifactId>reload4j</artifactId>
-                            <version>1.2.22</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.maven.doxia</groupId>
-                            <artifactId>doxia-site-renderer</artifactId>
-                            <version>1.9.1</version>
-                            <exclusions>
-                                <exclusion>
-                                    <artifactId>log4j</artifactId>
-                                    <groupId>log4j</groupId>
-                                </exclusion>
-                            </exclusions>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.maven.reporting</groupId>
-                            <artifactId>maven-reporting-impl</artifactId>
-                            <version>3.0.0</version>
-                            <exclusions>
-                                <exclusion>
-                                    <artifactId>log4j</artifactId>
-                                    <groupId>log4j</groupId>
-                                </exclusion>
-                            </exclusions>
-                        </dependency>
-                    </dependencies>
                     <configuration>
                         <effort>Max</effort>
                         <threshold>High</threshold>
@@ -215,52 +208,9 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>io.github.git-commit-id</groupId>
-                    <artifactId>git-commit-id-maven-plugin</artifactId>
-                    <version>6.0.0</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>revision</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <verbose>false</verbose>
-                        <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
-                        <failOnNoGitDirectory>true</failOnNoGitDirectory>
-                        <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                        <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
-                        <gitDescribe>
-                            <skip>true</skip>
-                        </gitDescribe>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>net.revelc.code</groupId>
-                    <artifactId>impsort-maven-plugin</artifactId>
-                    <version>1.9.0</version>
-                    <executions>
-                        <execution>
-                            <id>sort-imports</id>
-                            <phase>process-sources</phase>
-                            <goals>
-                                <goal>sort</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <groups>java.,javax.,org.,com.</groups>
-                        <staticGroups>java,*</staticGroups>
-                        <excludes>
-                            <exclude>**/thrift/*.java</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>2.16.0</version>
+                    <version>2.11.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -290,29 +240,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.8</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>ch.qos.reload4j</groupId>
-                            <artifactId>reload4j</artifactId>
-                            <version>1.2.22</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.maven.shared</groupId>
-                            <artifactId>maven-common-artifact-filters</artifactId>
-                            <version>1.4</version>
-                            <exclusions>
-                                <exclusion>
-                                    <artifactId>log4j</artifactId>
-                                    <groupId>log4j</groupId>
-                                </exclusion>
-                            </exclusions>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-help-plugin</artifactId>
                     <version>3.2.0</version>
                 </plugin>
@@ -334,7 +261,7 @@
                         <dependency>
                             <groupId>org.junit.jupiter</groupId>
                             <artifactId>junit-jupiter-engine</artifactId>
-                            <version>${version.junit.bom}</version>
+                            <version>${version.junit.jupiter}</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -475,10 +402,6 @@
                         <artifactId>sortpom-maven-plugin</artifactId>
                     </plugin>
                     <plugin>
-                        <groupId>net.revelc.code</groupId>
-                        <artifactId>impsort-maven-plugin</artifactId>
-                    </plugin>
-                    <plugin>
                         <groupId>net.revelc.code.formatter</groupId>
                         <artifactId>formatter-maven-plugin</artifactId>
                     </plugin>
@@ -487,11 +410,6 @@
         </profile>
         <profile>
             <id>docker</id>
-            <activation>
-                <property>
-                    <name>microservice-docker</name>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -540,7 +458,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>3.1.1</version>
                         <executions>
                             <!-- build javadoc jars per module for publishing to the repo -->
                             <execution>
@@ -551,20 +469,10 @@
                                 </goals>
                                 <configuration>
                                     <encoding>UTF-8</encoding>
-                                    <destDir>${project.build.directory}/javadoc</destDir>
-                                    <javadocVersion>11</javadocVersion>
-                                    <additionalJOptions>
-                                        <additionalJOption>-J-Xmx768m</additionalJOption>
-                                    </additionalJOptions>
+                                    <destDir>${project.build.directory}/apidocs</destDir>
+                                    <javadocVersion>1.8.0</javadocVersion>
+                                    <additionalJOption>-J-Xmx768m</additionalJOption>
                                     <tags>
-                                        <tag>
-                                            <name>XmlSchema</name>
-                                            <placement>X</placement>
-                                        </tag>
-                                        <tag>
-                                            <name>XmlNs</name>
-                                            <placement>X</placement>
-                                        </tag>
                                         <tag>
                                             <name>HTTP</name>
                                             <placement>m</placement>
@@ -585,46 +493,18 @@
                                             <placement>m</placement>
                                             <head>Output</head>
                                         </tag>
-                                        <tag>
-                                            <name>NonNullApi</name>
-                                            <placement>p</placement>
-                                            <head>Non-Null API</head>
-                                        </tag>
-                                        <tag>
-                                            <name>NonNullFields</name>
-                                            <placement>p</placement>
-                                            <head>Non-Null Fields</head>
-                                        </tag>
                                     </tags>
                                     <show>private</show>
                                     <quiet>true</quiet>
                                     <javaApiLinks>
                                         <property>
-                                            <name>api_11.0</name>
-                                            <value>https://docs.oracle.com/en/java/javase/11/docs/api</value>
+                                            <name>api_1.8</name>
+                                            <value>http://docs.oracle.com/javase/8/docs/api</value>
                                         </property>
                                     </javaApiLinks>
                                 </configuration>
                             </execution>
                         </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>ch.qos.reload4j</groupId>
-                                <artifactId>reload4j</artifactId>
-                                <version>1.2.22</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.apache.maven.doxia</groupId>
-                                <artifactId>doxia-site-renderer</artifactId>
-                                <version>1.7.4</version>
-                                <exclusions>
-                                    <exclusion>
-                                        <artifactId>log4j</artifactId>
-                                        <groupId>log4j</groupId>
-                                    </exclusion>
-                                </exclusions>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
