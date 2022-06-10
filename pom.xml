@@ -452,7 +452,7 @@
                                 </goals>
                                 <configuration>
                                     <encoding>UTF-8</encoding>
-                                    <destDir>${project.build.directory}/apidocs</destDir>
+                                    <destDir>${project.build.directory}/javadoc</destDir>
                                     <javadocVersion>1.8.0</javadocVersion>
                                     <additionalJOption>-J-Xmx768m</additionalJOption>
                                     <tags>
