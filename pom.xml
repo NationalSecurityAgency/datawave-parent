@@ -32,14 +32,14 @@
     </distributionManagement>
     <properties>
         <docker.image.prefix>datawave/</docker.image.prefix>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spotbugs.excludes.file />
         <version.docker.plugin>1.2.1</version.docker.plugin>
-        <version.junit>4.13.1</version.junit>
+        <version.junit>4.13</version.junit>
         <version.junit.jupiter>5.5.2</version.junit.jupiter>
         <version.junit.vintage>5.5.2</version.junit.vintage>
     </properties>
@@ -425,7 +425,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>3.2.0</version>
                         <executions>
                             <!-- build javadoc jars per module for publishing to the repo -->
                             <execution>
@@ -437,8 +437,10 @@
                                 <configuration>
                                     <encoding>UTF-8</encoding>
                                     <destDir>${project.build.directory}/apidocs</destDir>
-                                    <javadocVersion>1.8.0</javadocVersion>
-                                    <additionalJOption>-J-Xmx768m</additionalJOption>
+                                    <javadocVersion>11</javadocVersion>
+                                    <additionalJOptions>
+                                        <additionalJOption>-J-Xmx768m</additionalJOption>
+                                    </additionalJOptions>
                                     <tags>
                                         <tag>
                                             <name>HTTP</name>
@@ -456,17 +458,22 @@
                                             <head>HTTP Response Headers</head>
                                         </tag>
                                         <tag>
-                                            <name>returnWrapped</name>
-                                            <placement>m</placement>
-                                            <head>Output</head>
+                                            <name>NonNullApi</name>
+                                            <placement>p</placement>
+                                            <head>Non-Null API</head>
+                                        </tag>
+                                        <tag>
+                                            <name>NonNullFields</name>
+                                            <placement>p</placement>
+                                            <head>Non-Null Fields</head>
                                         </tag>
                                     </tags>
                                     <show>private</show>
                                     <quiet>true</quiet>
                                     <javaApiLinks>
                                         <property>
-                                            <name>api_1.8</name>
-                                            <value>http://docs.oracle.com/javase/8/docs/api</value>
+                                            <name>api_11.0</name>
+                                            <value>https://docs.oracle.com/en/java/javase/11/docs/api</value>
                                         </property>
                                     </javaApiLinks>
                                 </configuration>
