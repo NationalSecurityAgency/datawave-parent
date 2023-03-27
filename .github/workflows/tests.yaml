@@ -4,8 +4,8 @@ on:
   push:
     paths-ignore: ['*.md', 'CODEOWNERS', 'LICENSE']
     branches:
-    - 'main'
-    - 'release/*'
+      - 'main'
+      - 'release/*'
   pull_request:
     paths-ignore: ['*.md', 'CODEOWNERS', 'LICENSE']
 
