@@ -24,11 +24,11 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-    - name: Set up JDK ${{ JAVA_VERSION }}
+    - name: Set up JDK ${{ env.JAVA_VERSION }}
       uses: actions/setup-java@v3
       with:
-        java-version: ${{ JAVA_VERSION }}
-        distribution: ${{ JAVA_DISTRIBUTION }}
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: ${{ env.JAVA_DISTRIBUTION }}
     - name: Format code
       run: |
         mvn -V -B -e clean formatter:format sortpom:sort -Pautoformat
