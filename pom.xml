@@ -272,8 +272,8 @@
                             <version>1.4</version>
                             <exclusions>
                                 <exclusion>
-                                    <groupId>log4j</groupId>
                                     <artifactId>log4j</artifactId>
+                                    <groupId>log4j</groupId>
                                 </exclusion>
                             </exclusions>
                         </dependency>
