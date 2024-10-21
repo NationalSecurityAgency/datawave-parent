@@ -23,6 +23,7 @@
         <url>https://github.com/NationalSecurityAgency/datawave-parent</url>
     </scm>
     <distributionManagement>
+    <!-- NOT MEANT TO BE COMMITTED. TESTING REQUIRED CHECKS LOGIC -->
         <repository>
             <id>github-datawave</id>
             <name>GitHub Datawave Apache Maven Packages</name>
