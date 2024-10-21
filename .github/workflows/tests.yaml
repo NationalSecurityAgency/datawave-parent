@@ -9,11 +9,6 @@ on:
   pull_request:
     paths-ignore: ['*.md', 'CODEOWNERS', 'LICENSE']
 
-env:
-  RUN_MAVEN_TESTS: "false"
-  JAVA_VERSION: '11'
-  JAVA_DISTRIBUTION: 'zulu' #This is the default on v1 of the action for 1.8
-
 jobs:
   call-reusable-workflow:
     uses: nationalsecurityagency/datawave/.github/workflows/microservice-maven-tests.yaml@integration
