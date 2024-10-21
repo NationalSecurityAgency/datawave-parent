@@ -17,3 +17,6 @@ env:
 jobs:
   call-reusable-workflow:
     uses: nationalsecurityagency/datawave/.github/workflows/microservice-maven-tests.yaml@conditional-run-maven-tests
+    secrets:
+      USER_NAME: ${{ secrets.USER_NAME }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
