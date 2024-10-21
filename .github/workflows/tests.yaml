@@ -11,6 +11,8 @@ on:
 
 env:
   RUN_MAVEN_TESTS: "false"
+  JAVA_VERSION: '11'
+  JAVA_DISTRIBUTION: 'zulu' #This is the default on v1 of the action for 1.8
 
 jobs:
   call-reusable-workflow:
