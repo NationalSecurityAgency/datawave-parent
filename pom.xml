@@ -115,7 +115,7 @@
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations</artifactId>
-                <version>${version.swagger}</version>
+                <version>${version.swagger.v3}</version>
             </dependency>
             <dependency>
                 <groupId>jakarta.xml.bind</groupId>
