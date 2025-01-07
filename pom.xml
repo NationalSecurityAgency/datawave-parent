@@ -68,7 +68,7 @@
         <version.spring>5.3.21</version.spring>
         <version.spring-boot>2.7.1</version.spring-boot>
         <version.spring-cloud-context>3.1.3</version.spring-cloud-context>
-        <version.swagger-v3>2.2.0</version.swagger-v3>
+        <version.swagger.v3>2.2.0</version.swagger.v3>
         <version.xml-apis>1.4.01</version.xml-apis>
     </properties>
     <dependencyManagement>
