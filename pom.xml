@@ -39,14 +39,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spotbugs.excludes.file />
         <surefire.forkCount>1C</surefire.forkCount>
-        <version.accumulo>2.1.1</version.accumulo>
+        <version.accumulo>2.1.2</version.accumulo>
         <version.annotations>2.0.3</version.annotations>
         <version.commons-codec>1.7</version.commons-codec>
         <version.commons-collections4>4.4</version.commons-collections4>
         <version.commons-lang3>3.12.0</version.commons-lang3>
         <version.docker.plugin>1.2.1</version.docker.plugin>
         <version.guava>28.1-jre</version.guava>
-        <version.hadoop>3.3.5</version.hadoop>
+        <version.hadoop>3.3.6</version.hadoop>
         <version.hazelcast>5.1.2</version.hazelcast>
         <version.jackson>2.13.2</version.jackson>
         <version.jakarta-bind-api>2.3.3</version.jakarta-bind-api>
