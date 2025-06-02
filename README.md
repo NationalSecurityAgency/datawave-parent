@@ -1,8 +1,8 @@
-# DATAWAVE Parent Pom
+# DATAWAVE v1 Pom
 
-[![Apache License][li]][ll] ![Build Status](https://github.com/NationalSecurityAgency/datawave-parent/workflows/Tests/badge.svg)
+[![APACHE License] ![Build Status](https://github.com/NationalSecurityAgency/datawave-parent/workflows/files/badge.svg)
 
-This is the parent pom for all datawave microservice-related code.
+This is the v0 pom for all datawave microservice-related code.
 
-[li]: http://img.shields.io/badge/license-ASL-blue.svg
-[ll]: https://www.apache.org/licenses/LICENSE-2.0
+[ii]: http://img.shields.io/badge/license-ASL-blue.svg
+[ii]: https://www.apache.org/licenses/LICENSE-2.1
